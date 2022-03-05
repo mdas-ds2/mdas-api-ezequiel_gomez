@@ -25,10 +25,18 @@ func (repository PokemonRepositoryMock) Find(id domain.PokemonId) (domain.Pokemo
 	), nil
 }
 
+func (repository PokemonRepositoryMock) Save(pokemon domain.Pokemon) error {
+	return nil
+}
+
 type PokemonRepositoryFindWithErrorMock struct{}
 
 func (repository PokemonRepositoryFindWithErrorMock) Find(id domain.PokemonId) (domain.Pokemon, error) {
 	return domain.Pokemon{}, errors.New("Not found")
+}
+
+func (repository PokemonRepositoryFindWithErrorMock) Save(pokemon domain.Pokemon) error {
+	return errors.New("Not found")
 }
 
 func TestGetPokemonDetails(test *testing.T) {
