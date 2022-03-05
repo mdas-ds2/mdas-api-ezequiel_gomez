@@ -31,7 +31,7 @@ func TestUserRepositorySave(test *testing.T) {
 	repository := infrastructure.CreateFavoritePokemonMemoryRepository(&map[string][]string{})
 
 	//When
-	repository.Save(*user)
+	repository.Save(user)
 
 	//Then
 	result := repository.Find(userId)
