@@ -13,7 +13,7 @@ func mapResponseToPokemon(response PokeApiResponse) (domain.Pokemon, error) {
 	var pokemonResponse pokeApiShared.PokemonModel
 	json.Unmarshal(response, &pokemonResponse)
 
-	pokeId := domain.CreateId(pokemonResponse.ID)
+	pokeId := domain.CreatePokemonId(pokemonResponse.ID)
 	name := domain.CreateName(pokemonResponse.Name)
 	height := domain.CreateHeight(pokemonResponse.Height)
 	weight := domain.CreateWeight(pokemonResponse.Weight)

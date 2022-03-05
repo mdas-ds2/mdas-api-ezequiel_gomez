@@ -1,18 +1,18 @@
 package pokemon
 
 type Pokemon struct {
-	id                    Id
+	id                    PokemonId
 	name                  Name
 	height                Height
 	weight                Weight
 	timesMarkedAsFavorite TimesMarkedAsFavorite
 }
 
-func CreatePokemon(id Id, name Name, height Height, weight Weight, timesMarkedAsFavorite TimesMarkedAsFavorite) Pokemon {
+func CreatePokemon(id PokemonId, name Name, height Height, weight Weight, timesMarkedAsFavorite TimesMarkedAsFavorite) Pokemon {
 	return Pokemon{id, name, height, weight, timesMarkedAsFavorite}
 }
 
-func (pokemon *Pokemon) GetId() Id {
+func (pokemon *Pokemon) GetId() PokemonId {
 	return pokemon.id
 }
 

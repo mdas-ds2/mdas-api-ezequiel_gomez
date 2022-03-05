@@ -1,5 +1,5 @@
 package pokemon
 
 type Repository interface {
-	Find(id Id) (Pokemon, error)
+	Find(id PokemonId) (Pokemon, error)
 }

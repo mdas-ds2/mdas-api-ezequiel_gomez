@@ -14,7 +14,7 @@ type PokeApiPokemonRepository struct{}
 
 const pokeApiUrl = "https://pokeapi.co/api/v2/pokemon/"
 
-func (repository PokeApiPokemonRepository) Find(id domain.Id) (domain.Pokemon, error) {
+func (repository PokeApiPokemonRepository) Find(id domain.PokemonId) (domain.Pokemon, error) {
 	urlPath := pokeApiUrl + strconv.Itoa(id.GetValue())
 
 	response, errorOnResponse := httpClient.Get(urlPath)

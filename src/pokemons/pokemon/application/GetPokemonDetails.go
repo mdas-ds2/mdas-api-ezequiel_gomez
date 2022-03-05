@@ -9,7 +9,7 @@ type GetPokemonDetails struct {
 }
 
 func (getPokemonDetails *GetPokemonDetails) Execute(pokemonId int) (PokemonDetailsDTO, error) {
-	id := domain.CreateId(pokemonId)
+	id := domain.CreatePokemonId(pokemonId)
 	pokemon, error := getPokemonDetails.Repository.Find(id)
 
 	if error != nil {
