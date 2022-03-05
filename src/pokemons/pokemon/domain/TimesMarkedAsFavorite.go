@@ -1,13 +1,13 @@
 package pokemon
 
 type TimesMarkedAsFavorite struct {
-	value int
+	value uint
 }
 
-func (timesMarkedAsFavorite TimesMarkedAsFavorite) GetValue() int {
+func (timesMarkedAsFavorite TimesMarkedAsFavorite) GetValue() uint {
 	return timesMarkedAsFavorite.value
 }
 
-func New(value int) TimesMarkedAsFavorite {
+func CreateTimesMarkedAsFavorite(value uint) TimesMarkedAsFavorite {
 	return TimesMarkedAsFavorite{value}
 }
