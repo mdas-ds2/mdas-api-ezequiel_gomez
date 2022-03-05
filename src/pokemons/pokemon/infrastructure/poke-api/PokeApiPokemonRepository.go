@@ -40,9 +40,11 @@ func (repository PokeApiPokemonRepository) Find(pokemonId domain.PokemonId) (dom
 	return mapResponseToPokemon(response.Body, timesMarkedAsFAvorite)
 }
 
-func (repository PokeApiPokemonRepository) Save(pokemon domain.Pokemon) {
+func (repository PokeApiPokemonRepository) Save(pokemon domain.Pokemon) error {
 	pokemonId := pokemon.GetId().GetValue()
 	timesMarkedAsFavorite := pokemon.GetTimesMarkedAsFavorite().GetValue()
 
 	timesMarkedAsFavoriteHashTable[pokemonId] = timesMarkedAsFavorite
+
+	return nil
 }
