@@ -8,7 +8,7 @@ func (collection *DomainEventCollection) Add(event DomainEvent) {
 	collection.events = append(collection.events, event)
 }
 
-func (collection *DomainEventCollection) PullAll(event DomainEvent) []DomainEvent {
+func (collection *DomainEventCollection) PullAll() []DomainEvent {
 	var events []DomainEvent
 	events = append(events, collection.events...)
 

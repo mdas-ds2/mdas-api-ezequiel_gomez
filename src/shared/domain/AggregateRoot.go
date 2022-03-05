@@ -8,8 +8,8 @@ func (aggregate *AggregateRoot) Raise(event DomainEvent) {
 	aggregate.events.Add(event)
 }
 
-func (aggregate *AggregateRoot) PullDomainEvents() DomainEventCollection {
-	return aggregate.events
+func (aggregate *AggregateRoot) PullDomainEvents() []DomainEvent {
+	return aggregate.events.PullAll()
 }
 
 func CreateAggregateRoot(events DomainEventCollection) AggregateRoot {
