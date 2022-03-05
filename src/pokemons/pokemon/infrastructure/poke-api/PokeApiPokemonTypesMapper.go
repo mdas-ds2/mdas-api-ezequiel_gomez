@@ -9,7 +9,7 @@ import (
 
 type PokeApiResponse = []byte
 
-func mapResponseToPokemon(response PokeApiResponse) (domain.Pokemon, error) {
+func mapResponseToPokemon(response PokeApiResponse, timesMarkedAsFAvorite uint) (domain.Pokemon, error) {
 	var pokemonResponse sharedInfra.PokemonModel
 	json.Unmarshal(response, &pokemonResponse)
 
@@ -17,7 +17,7 @@ func mapResponseToPokemon(response PokeApiResponse) (domain.Pokemon, error) {
 	name := domain.CreateName(pokemonResponse.Name)
 	height := domain.CreateHeight(pokemonResponse.Height)
 	weight := domain.CreateWeight(pokemonResponse.Weight)
-	timesMarkedAsFavorite := domain.CreateTimesMarkedAsFavorite(0)
+	timesMarkedAsFavorite := domain.CreateTimesMarkedAsFavorite(timesMarkedAsFAvorite)
 
 	pokemon := domain.CreatePokemon(pokeId, name, height, weight, timesMarkedAsFavorite)
 
