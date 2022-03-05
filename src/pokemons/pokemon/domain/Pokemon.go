@@ -39,3 +39,7 @@ func (pokemon *Pokemon) GetWeight() Weight {
 func (pokemon *Pokemon) GetTimesMarkedAsFavorite() TimesMarkedAsFavorite {
 	return pokemon.timesMarkedAsFavorite
 }
+
+func (pokemon *Pokemon) IncreaseTimesMarkedAsFavorite(times uint) {
+	pokemon.timesMarkedAsFavorite = CreateTimesMarkedAsFavorite(pokemon.timesMarkedAsFavorite.value + times)
+}

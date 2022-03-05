@@ -5,7 +5,7 @@ import (
 )
 
 type GetPokemonDetails struct {
-	Repository domain.Repository
+	Repository domain.PokemonRepository
 }
 
 func (getPokemonDetails *GetPokemonDetails) Execute(pokemonId int) (PokemonDetailsDTO, error) {
