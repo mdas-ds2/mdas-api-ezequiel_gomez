@@ -3,11 +3,11 @@ package shared
 import "time"
 
 type DomainEvent struct {
-	aggregateId int
+	aggregateId interface{}
 	eventType   string
 	createdAt   time.Time
 }
 
-func CreateDomainEvent(aggregateId int, eventType string) DomainEvent {
+func CreateDomainEvent(aggregateId interface{}, eventType string) DomainEvent {
 	return DomainEvent{aggregateId, eventType, time.Now()}
 }
