@@ -40,5 +40,5 @@ func (repository FavoritePokemonMemoryRepository) Find(userId domain.UserId) dom
 	favoriteCollection := domain.CreatePokemonIdCollection(result)
 	user := domain.CreateUser(userId, favoriteCollection)
 
-	return *user
+	return user
 }
