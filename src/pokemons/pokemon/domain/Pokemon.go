@@ -1,6 +1,11 @@
 package pokemon
 
+import (
+	shared "github.com/mdas-ds2/mdas-api-g3/src/shared/domain"
+)
+
 type Pokemon struct {
+	shared.AggregateRoot
 	id                    PokemonId
 	name                  Name
 	height                Height
@@ -8,8 +13,11 @@ type Pokemon struct {
 	timesMarkedAsFavorite TimesMarkedAsFavorite
 }
 
-func CreatePokemon(id PokemonId, name Name, height Height, weight Weight, timesMarkedAsFavorite TimesMarkedAsFavorite) Pokemon {
-	return Pokemon{id, name, height, weight, timesMarkedAsFavorite}
+func CreatePokemon(pokemonId PokemonId, name Name, height Height, weight Weight, timesMarkedAsFavorite TimesMarkedAsFavorite) Pokemon {
+	emptyEventCollection := shared.CreateDomainEventCollection([]shared.DomainEvent{})
+	aggregateRoot := shared.CreateAggregateRoot(emptyEventCollection)
+
+	return Pokemon{aggregateRoot, pokemonId, name, height, weight, timesMarkedAsFavorite}
 }
 
 func (pokemon *Pokemon) GetId() PokemonId {
