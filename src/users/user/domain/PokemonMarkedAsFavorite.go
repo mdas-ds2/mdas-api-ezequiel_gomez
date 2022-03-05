@@ -1,15 +1,28 @@
 package user
 
 import (
-	shared "github.com/mdas-ds2/mdas-api-g3/src/shared/domain"
+	"time"
 )
 
 type PokemonMarkedAsFavorite struct {
-	shared.DomainEvent
+	aggregateId string
+	eventType   string
+	createdAt   time.Time
 }
 
 func CreatePokemonMarkedAsFavorite(pokemonId PokemonId) PokemonMarkedAsFavorite {
 	eventType := "pokemon-marked-as-favorite"
-	domainEvent := shared.CreateDomainEvent(pokemonId.GetValue(), eventType)
-	return PokemonMarkedAsFavorite{domainEvent}
+	return PokemonMarkedAsFavorite{pokemonId.GetValue(), eventType, time.Now()}
+}
+
+func (event PokemonMarkedAsFavorite) AggregateId() string {
+	return event.aggregateId
+}
+
+func (event PokemonMarkedAsFavorite) EventType() string {
+	return event.eventType
+}
+
+func (event PokemonMarkedAsFavorite) CreatedAt() time.Time {
+	return event.createdAt
 }
