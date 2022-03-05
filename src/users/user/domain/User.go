@@ -28,6 +28,7 @@ func (user *User) AddFavorite(pokemonId PokemonId) error {
 	}
 
 	user.favoritePokemons.Add(pokemonId)
+	user.Raise(CreatePokemonMarkedAsFavorite(pokemonId))
 
 	return nil
 }
