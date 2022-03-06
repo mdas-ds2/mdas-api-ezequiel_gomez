@@ -1,4 +1,4 @@
-package pokemon
+package controllers
 
 import (
 	"net/http"
