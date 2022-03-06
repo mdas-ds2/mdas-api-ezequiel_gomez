@@ -9,7 +9,7 @@ type PokemonNotFoundException struct {
 	err error
 }
 
-func CreatePokemonNotFoundException(id Id) PokemonNotFoundException {
+func CreatePokemonNotFoundException(id PokemonId) PokemonNotFoundException {
 	message := fmt.Sprintf("Pokemon %d not found", id.GetValue())
 	exception := PokemonNotFoundException{errors.New(message)}
 	return exception

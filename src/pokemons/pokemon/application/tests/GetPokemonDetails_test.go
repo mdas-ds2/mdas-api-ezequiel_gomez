@@ -15,19 +15,28 @@ const POKEMON_WEIGHT = 1
 
 type PokemonRepositoryMock struct{}
 
-func (repository PokemonRepositoryMock) Find(id domain.Id) (domain.Pokemon, error) {
+func (repository PokemonRepositoryMock) Find(id domain.PokemonId) (domain.Pokemon, error) {
 	return domain.CreatePokemon(
 		id,
 		domain.CreateName(POKEMON_NAME),
 		domain.CreateHeight(POKEMON_HEIGHT),
 		domain.CreateWeight(POKEMON_WEIGHT),
+		domain.CreateTimesMarkedAsFavorite(0),
 	), nil
+}
+
+func (repository PokemonRepositoryMock) Save(pokemon domain.Pokemon) error {
+	return nil
 }
 
 type PokemonRepositoryFindWithErrorMock struct{}
 
-func (repository PokemonRepositoryFindWithErrorMock) Find(id domain.Id) (domain.Pokemon, error) {
+func (repository PokemonRepositoryFindWithErrorMock) Find(id domain.PokemonId) (domain.Pokemon, error) {
 	return domain.Pokemon{}, errors.New("Not found")
+}
+
+func (repository PokemonRepositoryFindWithErrorMock) Save(pokemon domain.Pokemon) error {
+	return errors.New("Not found")
 }
 
 func TestGetPokemonDetails(test *testing.T) {

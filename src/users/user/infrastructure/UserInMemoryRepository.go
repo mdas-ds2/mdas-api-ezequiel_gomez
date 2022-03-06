@@ -4,15 +4,15 @@ import (
 	domain "github.com/mdas-ds2/mdas-api-g3/src/users/user/domain"
 )
 
-type FavoritePokemonMemoryRepository struct {
+type UserInMemoryRepository struct {
 	database map[string][]string
 }
 
-func CreateFavoritePokemonMemoryRepository(database *map[string][]string) FavoritePokemonMemoryRepository {
-	return FavoritePokemonMemoryRepository{*database}
+func CreateUserInMemoryRepository(database *map[string][]string) UserInMemoryRepository {
+	return UserInMemoryRepository{*database}
 }
 
-func (repository FavoritePokemonMemoryRepository) Save(user domain.User) error {
+func (repository UserInMemoryRepository) Save(user domain.User) error {
 	userId := user.GetId().GetValue()
 	favoriteCollection := user.GetFavorites().GetValues()
 
@@ -27,7 +27,7 @@ func (repository FavoritePokemonMemoryRepository) Save(user domain.User) error {
 	return nil
 }
 
-func (repository FavoritePokemonMemoryRepository) Find(userId domain.UserId) domain.User {
+func (repository UserInMemoryRepository) Find(userId domain.UserId) domain.User {
 	id := userId.GetValue()
 	favorites := repository.database[id]
 	result := []domain.PokemonId{}
@@ -40,5 +40,5 @@ func (repository FavoritePokemonMemoryRepository) Find(userId domain.UserId) dom
 	favoriteCollection := domain.CreatePokemonIdCollection(result)
 	user := domain.CreateUser(userId, favoriteCollection)
 
-	return *user
+	return user
 }

@@ -11,7 +11,7 @@ func TestUserRepositoryFind(test *testing.T) {
 	//Given
 	userId := "pere"
 	favoritePokemonIds := []string{"25", "678"}
-	repository := infrastructure.CreateFavoritePokemonMemoryRepository(&map[string][]string{userId: favoritePokemonIds})
+	repository := infrastructure.CreateUserInMemoryRepository(&map[string][]string{userId: favoritePokemonIds})
 
 	//When
 	result := repository.Find(domain.CreateUserId(userId))
@@ -28,10 +28,10 @@ func TestUserRepositorySave(test *testing.T) {
 	pokemonId := domain.CreatePokemonId("25")
 	favorites := domain.CreatePokemonIdCollection([]domain.PokemonId{pokemonId})
 	user := domain.CreateUser(userId, favorites)
-	repository := infrastructure.CreateFavoritePokemonMemoryRepository(&map[string][]string{})
+	repository := infrastructure.CreateUserInMemoryRepository(&map[string][]string{})
 
 	//When
-	repository.Save(*user)
+	repository.Save(user)
 
 	//Then
 	result := repository.Find(userId)

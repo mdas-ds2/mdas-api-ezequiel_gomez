@@ -24,7 +24,7 @@ func (repository UserRepositoryMock) Save(user domain.User) error {
 func (repository UserRepositoryMock) Find(userId domain.UserId) domain.User {
 	pokemonId := domain.CreatePokemonId("pkchu9102")
 	user := domain.CreateUser(domain.CreateUserId(userId.GetValue()), domain.CreatePokemonIdCollection([]domain.PokemonId{pokemonId}))
-	return *user
+	return user
 }
 
 func TestAddFavoritePokemon(test *testing.T) {

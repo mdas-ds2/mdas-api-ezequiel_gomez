@@ -5,11 +5,11 @@ import (
 )
 
 type GetPokemonDetails struct {
-	Repository domain.Repository
+	Repository domain.PokemonRepository
 }
 
 func (getPokemonDetails *GetPokemonDetails) Execute(pokemonId int) (PokemonDetailsDTO, error) {
-	id := domain.CreateId(pokemonId)
+	id := domain.CreatePokemonId(pokemonId)
 	pokemon, error := getPokemonDetails.Repository.Find(id)
 
 	if error != nil {
@@ -21,6 +21,7 @@ func (getPokemonDetails *GetPokemonDetails) Execute(pokemonId int) (PokemonDetai
 		pokemon.GetName().GetValue(),
 		pokemon.GetHeight().GetValue(),
 		pokemon.GetWeight().GetValue(),
+		pokemon.GetTimesMarkedAsFavorite().GetValue(),
 	}
 
 	return pokemonDetail, nil

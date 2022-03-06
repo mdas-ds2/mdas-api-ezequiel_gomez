@@ -10,7 +10,7 @@ import (
 func TestFind(test *testing.T) {
 	//Given
 	repository := infrastructure.PokeApiPokemonRepository{}
-	pokemonId := domain.CreateId(25)
+	pokemonId := domain.CreatePokemonId(25)
 
 	//When
 	result, _ := repository.Find(pokemonId)
