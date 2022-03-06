@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	rabbitMQ "github.com/mdas-ds2/mdas-api-g3/src/generic/infrastructure/msg-broker/rabbitmq"
 	webserver "github.com/mdas-ds2/mdas-api-g3/src/generic/infrastructure/web-server"
 	sharedInfrastructure "github.com/mdas-ds2/mdas-api-g3/src/shared/infrastructure"
 	application "github.com/mdas-ds2/mdas-api-g3/src/users/user/application"
@@ -12,7 +13,8 @@ import (
 )
 
 type addFavoritePokemonController struct {
-	pattern string
+	msgQueue rabbitMQ.RabbitQueue
+	pattern  string
 }
 
 const FAVORITE_POKEMON_URL_PATTERN_SEGMENT = "/favorite-pokemon/"
@@ -49,7 +51,7 @@ func (controller addFavoritePokemonController) Handler(response http.ResponseWri
 	}
 
 	inMemoryRepo := infrastructure.CreateUserInMemoryRepository(&InMemomyFavoritePokemonDDBB)
-	rabbitMQEventPublisher := sharedInfrastructure.CreateRabbitMQEventPublisher()
+	rabbitMQEventPublisher := sharedInfrastructure.CreateRabbitMQEventPublisher(controller.msgQueue)
 
 	addFavoritePokemonUseCase := application.AddFavoritePokemon{
 		Publisher:  rabbitMQEventPublisher,
@@ -71,8 +73,8 @@ func (controller addFavoritePokemonController) GetPattern() string {
 	return controller.pattern
 }
 
-func CreateAddFavoritePokemonController() addFavoritePokemonController {
-	return addFavoritePokemonController{pattern: FAVORITE_POKEMON_URL_PATTERN_SEGMENT}
+func CreateAddFavoritePokemonController(pokemonQueue rabbitMQ.RabbitQueue) addFavoritePokemonController {
+	return addFavoritePokemonController{pokemonQueue, FAVORITE_POKEMON_URL_PATTERN_SEGMENT}
 }
 
 func respond(response http.ResponseWriter, message string) {
