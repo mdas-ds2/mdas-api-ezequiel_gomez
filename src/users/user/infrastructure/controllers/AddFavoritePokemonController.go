@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	webserver "github.com/mdas-ds2/mdas-api-g3/src/generic/infrastructure/web-server"
+	sharedInfrastructure "github.com/mdas-ds2/mdas-api-g3/src/shared/infrastructure"
 	application "github.com/mdas-ds2/mdas-api-g3/src/users/user/application"
 	infrastructure "github.com/mdas-ds2/mdas-api-g3/src/users/user/infrastructure"
 )
@@ -48,8 +49,10 @@ func (controller addFavoritePokemonController) Handler(response http.ResponseWri
 	}
 
 	inMemoryRepo := infrastructure.CreateUserInMemoryRepository(&InMemomyFavoritePokemonDDBB)
+	rabbitMQEventPublisher := sharedInfrastructure.CreateRabbitMQEventPublisher()
 
 	addFavoritePokemonUseCase := application.AddFavoritePokemon{
+		Publisher:  rabbitMQEventPublisher,
 		Repository: inMemoryRepo,
 	}
 
