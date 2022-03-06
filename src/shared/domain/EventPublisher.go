@@ -1,5 +1,5 @@
 package shared
 
 type EventPublisher interface {
-	Publish(events DomainEvent)
+	Publish(events []DomainEvent)
 }
