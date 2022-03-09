@@ -1,5 +1,5 @@
 # mdas-api-ezequiel_gomez
-MDAS - Diseño de software II - DDD - Reto individual
+Small API about Pokemons written in Go following a domain-driven design with a RabbitMQ for communicaton between bounded context 
 
 ### Contributors:
 
