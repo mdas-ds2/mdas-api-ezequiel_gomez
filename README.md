@@ -1,5 +1,5 @@
 # mdas-api-ezequiel_gomez
-Small API about Pokemons written in Go following a domain-driven design with a RabbitMQ for communicaton between bounded context 
+Small API about Pokemons written in Go following a domain-driven design with a RabbitMQ for communication between bounded contexts
 
 ### Contributors:
 
